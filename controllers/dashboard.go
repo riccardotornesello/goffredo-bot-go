@@ -58,6 +58,15 @@ func (c *DashboardController) Post() {
 		return
 	}
 
+	o := orm.NewOrm()
+	var sounds []*models.Sound
+	o.QueryTable(new(models.Sound)).Filter("UserId", user.ID).All(&sounds)
+	soundslimit, _ := beego.AppConfig.Int("soundsLimit")
+	if len(sounds) >= soundslimit {
+		c.Ctx.Redirect(302, "/dashboard")
+		return
+	}
+
 	file, _, err := c.GetFile("sound")
 	if err != nil {
 		c.Ctx.Abort(500, "Error")
@@ -71,7 +80,6 @@ func (c *DashboardController) Post() {
 		UserId: user.ID,
 		Ready:  false,
 	}
-	o := orm.NewOrm()
 	id, err := o.Insert(&sound)
 	if err != nil {
 		c.Ctx.Abort(500, "Error")
