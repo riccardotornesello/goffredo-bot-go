@@ -2,7 +2,12 @@ lastupdate.tmp
 conf/secrets.conf
 /goffredo
 /goffredo-go
-data/
+/data/
+Dockerfile*
+docker-compose.yml
+.dockerignore
+.git
+.gitignore
 
 # Created by https://www.toptal.com/developers/gitignore/api/go
 # Edit at https://www.toptal.com/developers/gitignore?templates=go

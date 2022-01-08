@@ -1,0 +1,15 @@
+version: "3"
+
+services:
+  web:
+    build: .
+    environment:
+      ENV: prod
+    volumes:
+      - ./data/db:/app/data/db
+  proxy:
+    build:
+      context: .
+      dockerfile: Dockerfile.nginx
+    ports:
+      - 8080:80

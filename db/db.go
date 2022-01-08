@@ -9,6 +9,6 @@ import (
 
 func init() {
 	orm.RegisterModel(new(models.Sound))
-	orm.RegisterDataBase("default", "sqlite3", "dev.db")
+	orm.RegisterDataBase("default", "sqlite3", "data/db/dev.db")
 	orm.RunSyncdb("default", false, true)
 }
