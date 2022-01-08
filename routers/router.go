@@ -9,4 +9,5 @@ import (
 func init() {
 	beego.Router("/", &controllers.MainController{})
 	beego.Router("/callback", &controllers.CallbackController{})
+	beego.Router("/dashboard", &controllers.DashboardController{})
 }
