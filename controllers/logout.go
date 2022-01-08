@@ -10,4 +10,5 @@ type LogoutController struct {
 
 func (c *LogoutController) Get() {
 	c.DelSession("token")
+	c.Ctx.Redirect(302, "/")
 }
