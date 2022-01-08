@@ -12,7 +12,13 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.nginx
+    networks:
+      - web
     labels:
       - traefik.enable=true
       - traefik.http.routers.goffredo.rule=Host(`goffredobot.xyz`)
       - traefik.http.routers.goffredo.tls=true
+
+networks:
+  web:
+    external: true
