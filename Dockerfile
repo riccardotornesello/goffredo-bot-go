@@ -1,6 +1,6 @@
 FROM golang:alpine as build
 WORKDIR /app/src
-RUN apk --no-cache add alpine-sdk
+RUN apk --no-cache add alpine-sdk opus-dev
 COPY go.mod go.sum ./
 RUN go mod download
 COPY . .
