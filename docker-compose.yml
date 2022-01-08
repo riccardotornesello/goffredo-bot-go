@@ -17,6 +17,7 @@ services:
     depends_on:
       - web
     networks:
+      - default
       - web
     labels:
       - traefik.enable=true
