@@ -2,6 +2,7 @@ lastupdate.tmp
 dev.db
 conf/secrets.conf
 /goffredo
+/goffredo-go
 
 # Created by https://www.toptal.com/developers/gitignore/api/go
 # Edit at https://www.toptal.com/developers/gitignore?templates=go
