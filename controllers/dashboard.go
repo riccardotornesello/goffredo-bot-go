@@ -19,6 +19,7 @@ func (c *DashboardController) Get() {
 	token := c.GetSession("token")
 	if token == nil {
 		c.Ctx.Redirect(302, "/login")
+		return
 	}
 
 	discord, err := discordgo.New("Bearer " + token.(string))
@@ -50,6 +51,7 @@ func (c *DashboardController) Post() {
 	token := c.GetSession("token")
 	if token == nil {
 		c.Ctx.Redirect(302, "/login")
+		return
 	}
 
 	discord, err := discordgo.New("Bearer " + token.(string))
