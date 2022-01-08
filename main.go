@@ -21,6 +21,9 @@ func main() {
 	go func() { bot.Run(&wg) }()
 
 	// Run web server
+	if os.Getenv("ENV") == "prod" {
+		beego.BConfig.RunMode = "prod"
+	}
 	go func() { beego.Run() }()
 
 	// Wait for interrupt
