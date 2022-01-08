@@ -16,12 +16,12 @@ type DashboardController struct {
 }
 
 func (c *DashboardController) Get() {
-	token := c.GetSession("token").(string)
-	if token == "" {
+	token := c.GetSession("token")
+	if token == nil {
 		c.Ctx.Redirect(302, "/login")
 	}
 
-	discord, err := discordgo.New("Bearer " + token)
+	discord, err := discordgo.New("Bearer " + token.(string))
 	if err != nil {
 		c.Ctx.Abort(500, "Error")
 		return
@@ -47,12 +47,12 @@ func (c *DashboardController) Get() {
 }
 
 func (c *DashboardController) Post() {
-	token := c.GetSession("token").(string)
-	if token == "" {
+	token := c.GetSession("token")
+	if token == nil {
 		c.Ctx.Redirect(302, "/login")
 	}
 
-	discord, err := discordgo.New("Bearer " + token)
+	discord, err := discordgo.New("Bearer " + token.(string))
 	if err != nil {
 		c.Ctx.Abort(500, "Error")
 		return
