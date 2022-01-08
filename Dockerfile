@@ -11,4 +11,5 @@ RUN apk --no-cache add ffmpeg
 WORKDIR /app
 COPY --from=build /app/src/app ./
 COPY views/ views/
+COPY conf/ conf/
 CMD ["./app"]

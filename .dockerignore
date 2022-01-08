@@ -1,11 +1,10 @@
 lastupdate.tmp
-conf/secrets.conf
 /goffredo
 /goffredo-go
 /data/
 Dockerfile*
 docker-compose.yml
-.dockerignore
+*.dockerignore
 .git
 .gitignore
 
