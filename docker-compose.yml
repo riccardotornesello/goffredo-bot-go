@@ -14,6 +14,8 @@ services:
       dockerfile: Dockerfile.nginx
     expose:
       - 80
+    depends_on:
+      - web
     networks:
       - web
     labels:
