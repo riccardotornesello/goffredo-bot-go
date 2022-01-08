@@ -6,6 +6,7 @@ require (
 	github.com/beego/beego/v2 v2.0.1
 	github.com/bwmarrin/dgvoice v0.0.0-20210225172318-caaac756e02e
 	github.com/bwmarrin/discordgo v0.23.2
+	github.com/google/uuid v1.1.1
 	github.com/mattn/go-sqlite3 v2.0.3+incompatible
 	github.com/u2takey/ffmpeg-go v0.4.0
 	golang.org/x/oauth2 v0.0.0-20180821212333-d2e6202438be

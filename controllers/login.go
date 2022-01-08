@@ -1,30 +1,20 @@
 package controllers
 
 import (
-	"context"
-
 	beego "github.com/beego/beego/v2/server/web"
+	"github.com/google/uuid"
 	"golang.org/x/oauth2"
 )
 
-type CallbackController struct {
+type LoginController struct {
 	beego.Controller
 }
 
-func (c *CallbackController) Get() {
-	code := c.GetString("code")
-	state := c.GetString("state")
-
-	if c.GetSession("state").(string) != state {
-		c.Ctx.Abort(500, "Invalid state")
-		return
-	}
-
+func (c *LoginController) Get() {
 	clientid, _ := beego.AppConfig.String("discord::clientid")
 	clientsecret, _ := beego.AppConfig.String("discord::clientsecret")
 	redirecturl, _ := beego.AppConfig.String("discord::redirecturl")
 
-	ctx := context.Background()
 	conf := &oauth2.Config{
 		ClientID:     clientid,
 		ClientSecret: clientsecret,
@@ -36,12 +26,9 @@ func (c *CallbackController) Get() {
 		},
 	}
 
-	tok, err := conf.Exchange(ctx, code)
-	if err != nil {
-		c.Ctx.Abort(500, "Error")
-		return
-	}
+	state := uuid.New().String()
+	url := conf.AuthCodeURL(state, oauth2.AccessTypeOffline)
+	c.SetSession("state", state)
 
-	c.SetSession("token", tok.AccessToken)
-	c.Ctx.Redirect(302, "/dashboard")
+	c.Ctx.Redirect(302, url)
 }
