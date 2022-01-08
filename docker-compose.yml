@@ -12,5 +12,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.nginx
-    ports:
-      - 8080:80
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.goffredo.rule=Host(`goffredobot.xyz`)
+      - traefik.http.routers.goffredo.tls=true
