@@ -1,7 +1,7 @@
 FROM golang:alpine as build
 WORKDIR /app/src
 RUN apk --no-cache add alpine-sdk
-COPY go.mod go.sum .
+COPY go.mod go.sum ./
 RUN go mod download
 COPY . .
 RUN GOOS=linux go build -a -installsuffix cgo -o app .
