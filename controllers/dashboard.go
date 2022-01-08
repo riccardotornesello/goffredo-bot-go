@@ -34,8 +34,12 @@ func (c *DashboardController) Get() {
 	var sounds []*models.Sound
 	o.QueryTable(new(models.Sound)).Filter("UserId", user.ID).All(&sounds)
 
-	c.Data["Username"] = user.Username
+	soundslimit, _ := beego.AppConfig.Int("soundsLimit")
+	c.Data["SoundsLimit"] = soundslimit
+	c.Data["SoundsLeft"] = soundslimit - len(sounds)
 	c.Data["Sounds"] = sounds
+
+	c.Layout = "layout.tpl"
 	c.TplName = "dashboard.tpl"
 }
 
