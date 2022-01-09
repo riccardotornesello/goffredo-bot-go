@@ -116,3 +116,31 @@ func (c *DashboardController) Post() {
 
 	c.Ctx.Redirect(302, "/dashboard")
 }
+
+func (c *DashboardController) Delete() {
+	token := c.GetSession("token")
+	if token == nil {
+		c.Ctx.Redirect(302, "/login")
+		return
+	}
+
+	discord, err := discordgo.New("Bearer " + token.(string))
+	if err != nil {
+		c.Ctx.Abort(500, "Error")
+		return
+	}
+
+	user, err := discord.User("@me")
+	if err != nil {
+		c.Ctx.Redirect(302, "/login")
+		return
+	}
+
+	soundId := c.GetString("id")
+
+	o := orm.NewOrm()
+	o.QueryTable(new(models.Sound)).Filter("UserId", user.ID).Filter("Id", soundId).Delete()
+
+	c.Data["json"] = map[string]interface{}{"status": "ok"}
+	c.ServeJSON()
+}

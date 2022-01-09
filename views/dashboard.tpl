@@ -60,7 +60,7 @@
                       <span class="badge badge-sm bg-gradient-success">Enabled</span>
                     </td>
                     <td class="align-middle">
-                      <a href="" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Delete sound">
+                      <a onclick="deleteSound({{ .Id }})" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Delete sound">
                         Delete
                       </a>
                     </td>
