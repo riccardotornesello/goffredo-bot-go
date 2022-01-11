@@ -3,6 +3,7 @@ version: "3"
 services:
   web:
     build: .
+    restart: always
     environment:
       ENV: prod
     volumes:
@@ -12,6 +13,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.nginx
+    restart: always
     expose:
       - 80
     depends_on:
