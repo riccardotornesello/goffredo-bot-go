@@ -1,10 +1,8 @@
 package controllers
 
 import (
-	"context"
-
 	beego "github.com/beego/beego/v2/server/web"
-	"golang.org/x/oauth2"
+	"goffredo/auth"
 )
 
 type CallbackController struct {
@@ -15,28 +13,17 @@ func (c *CallbackController) Get() {
 	code := c.GetString("code")
 	state := c.GetString("state")
 
+	if state == "" {
+		c.Ctx.Redirect(302, "/dashboard")
+		return
+	}
+
 	if c.GetSession("state").(string) != state {
 		c.Ctx.Abort(500, "Invalid state")
 		return
 	}
 
-	clientid, _ := beego.AppConfig.String("discord::clientid")
-	clientsecret, _ := beego.AppConfig.String("discord::clientsecret")
-	redirecturl, _ := beego.AppConfig.String("discord::redirecturl")
-
-	ctx := context.Background()
-	conf := &oauth2.Config{
-		ClientID:     clientid,
-		ClientSecret: clientsecret,
-		RedirectURL:  redirecturl,
-		Scopes:       []string{"identify", "email", "guilds"},
-		Endpoint: oauth2.Endpoint{
-			AuthURL:  "https://discord.com/api/oauth2/authorize",
-			TokenURL: "https://discord.com/api/oauth2/token",
-		},
-	}
-
-	tok, err := conf.Exchange(ctx, code)
+	tok, err := auth.UserConf.Exchange(auth.Ctx, code)
 	if err != nil {
 		c.Ctx.Abort(500, "Error")
 		return

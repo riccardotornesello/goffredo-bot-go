@@ -16,6 +16,10 @@
   </nav>
 
   <div class="container-fluid py-4">
+    <a href="{{ .BotAddUrl }}" type="button" class="btn bg-gradient-primary btn-lg">Add Goffredo in your server</a>
+  </div>
+
+  <div class="container-fluid py-4">
     <div class="row">
       <div class="col-12">
         <div class="card mb-4">

@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"fmt"
+	"goffredo/auth"
 	"goffredo/models"
 	"path/filepath"
 
@@ -9,6 +10,7 @@ import (
 	beego "github.com/beego/beego/v2/server/web"
 	"github.com/bwmarrin/discordgo"
 	ffmpeg "github.com/u2takey/ffmpeg-go"
+	"golang.org/x/oauth2"
 )
 
 type DashboardController struct {
@@ -37,11 +39,14 @@ func (c *DashboardController) Get() {
 	o := orm.NewOrm()
 	var sounds []*models.Sound
 	o.QueryTable(new(models.Sound)).Filter("UserId", user.ID).All(&sounds)
-
 	soundslimit, _ := beego.AppConfig.Int("soundsLimit")
+
+	botAddUrl := auth.BotConf.AuthCodeURL("", oauth2.SetAuthURLParam("permissions", "36700160"))
+
 	c.Data["SoundsLimit"] = soundslimit
 	c.Data["SoundsLeft"] = soundslimit - len(sounds)
 	c.Data["Sounds"] = sounds
+	c.Data["BotAddUrl"] = botAddUrl
 
 	c.Layout = "layout.tpl"
 	c.TplName = "dashboard.tpl"
