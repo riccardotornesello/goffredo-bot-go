@@ -1,5 +1,25 @@
 {{template "modals/sound.tpl"}}
 
+  <!-- DeleteModal -->
+  <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="deleteModalLabel">Delete sound</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body"></div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+          <button type="button" class="btn btn-danger" id="submit-button">
+            <span class="visually-hidden spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            Yes
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" navbar-scroll="true">
     <div class="container-fluid py-1 px-3">
       <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
@@ -64,7 +84,7 @@
                       <span class="badge badge-sm bg-gradient-success">Enabled</span>
                     </td>
                     <td class="align-middle">
-                      <a onclick="deleteSound({{ .Id }})" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Delete sound">
+                      <a class="text-secondary font-weight-bold text-xs" style="cursor: pointer;" data-toggle="tooltip" data-original-title="Delete sound" data-bs-toggle="modal" data-bs-target="#deleteModal" data-bs-id="{{ .Id }}" data-bs-name="{{ .Name }}">
                         Delete
                       </a>
                     </td>
