@@ -5,6 +5,7 @@ import (
 	"goffredo/auth"
 	"goffredo/models"
 	"path/filepath"
+	"time"
 
 	"github.com/beego/beego/v2/client/orm"
 	beego "github.com/beego/beego/v2/server/web"
@@ -99,25 +100,26 @@ func (c *DashboardController) Post() {
 		return
 	}
 
-	soundsDirectory, _ := beego.AppConfig.String("soundsDirectory")
-	soundIdStr := fmt.Sprintf("%v", id)
-	outputFile := filepath.Join(soundsDirectory, soundIdStr)
-	ffmpegErr := ffmpeg.Input("pipe:").
-		Filter("atrim", ffmpeg.Args{}, ffmpeg.KwArgs{"start": 0, "end": 6}).
-		Filter("dynaudnorm", ffmpeg.Args{}).
-		Filter("volume", ffmpeg.Args{}, ffmpeg.KwArgs{"volume": "-10dB"}).
-		Output(outputFile, ffmpeg.KwArgs{"format": "opus"}).
-		WithInput(file).
-		Run()
+	go func() {
+		time.Sleep(time.Second * 10)
+		soundsDirectory, _ := beego.AppConfig.String("soundsDirectory")
+		soundIdStr := fmt.Sprintf("%v", id)
+		outputFile := filepath.Join(soundsDirectory, soundIdStr)
+		ffmpegErr := ffmpeg.Input("pipe:").
+			Filter("atrim", ffmpeg.Args{}, ffmpeg.KwArgs{"start": 0, "end": 6}).
+			Filter("dynaudnorm", ffmpeg.Args{}).
+			Filter("volume", ffmpeg.Args{}, ffmpeg.KwArgs{"volume": "-10dB"}).
+			Output(outputFile, ffmpeg.KwArgs{"format": "opus"}).
+			WithInput(file).
+			Run()
 
-	if ffmpegErr != nil {
-		o.Delete(&sound)
-		c.Ctx.Abort(500, ffmpegErr.Error())
-		return
-	}
-
-	sound.Ready = true
-	o.Update(&sound)
+		if ffmpegErr != nil {
+			o.Delete(&sound)
+		} else {
+			sound.Ready = true
+			o.Update(&sound)
+		}
+	}()
 
 	c.Ctx.Redirect(302, "/dashboard")
 }
@@ -144,7 +146,7 @@ func (c *DashboardController) Delete() {
 	soundId := c.GetString("id")
 
 	o := orm.NewOrm()
-	o.QueryTable(new(models.Sound)).Filter("UserId", user.ID).Filter("Id", soundId).Delete()
+	o.QueryTable(new(models.Sound)).Filter("UserId", user.ID).Filter("Id", soundId).Filter("Ready", true).Delete()
 
 	c.Data["json"] = map[string]interface{}{"status": "ok"}
 	c.ServeJSON()
