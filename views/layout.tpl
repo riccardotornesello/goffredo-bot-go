@@ -8,7 +8,7 @@
   <link rel="icon" type="image/png" href="/static/img/favicon.png">
 
   <title>
-    GoffredoBot
+    Goffredo Bot
   </title>
   
   <!--     Fonts and icons     -->
@@ -32,12 +32,14 @@
   </script>
 </head>
 
-<body class="g-sidenav-show  bg-gray-100">
+<body>
   <main class="main-content position-relative max-height-vh-100 h-100 mt-1 border-radius-lg ">
 
     {{.LayoutContent}}
 
   </main>
+
+  {{template "partials/footer.tpl" .}}
 
   <!--   Core JS Files   -->
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
