@@ -12,7 +12,7 @@
       <div class="col-lg-6 mt-lg-0 mt-5 ps-lg-0 ps-0">
         <div class="p-3 info-horizontal">
           <div class="icon icon-shape rounded-circle bg-gradient-primary shadow text-center">
-            <i class="fas fa-ship opacity-10"></i>
+            <i class="fas fa-sign-in-alt opacity-10"></i>
           </div>
           <div class="description ps-3">
             <p class="mb-0">Log in</p>
@@ -21,7 +21,7 @@
 
         <div class="p-3 info-horizontal">
           <div class="icon icon-shape rounded-circle bg-gradient-primary shadow text-center">
-            <i class="fas fa-handshake opacity-10"></i>
+            <i class="fas fa-upload opacity-10"></i>
           </div>
           <div class="description ps-3">
             <p class="mb-0">Upload a short sound</p>
@@ -29,7 +29,7 @@
         </div>
         <div class="p-3 info-horizontal">
           <div class="icon icon-shape rounded-circle bg-gradient-primary shadow text-center">
-            <i class="fas fa-hourglass opacity-10"></i>
+            <i class="fas fa-volume-up opacity-10"></i>
           </div>
           <div class="description ps-3">
             <p class="mb-0">Enjoy!</p>
