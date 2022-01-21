@@ -8,6 +8,8 @@
         <a href="/dashboard" class="text-primary icon-move-right">Let's go
           <i class="fas fa-arrow-right text-sm ms-1"></i>
         </a>
+        <hr>
+        <p>WARNING: Goffredo is in Beta stage, undocumented features (bugs) may occur</p>
       </div>
       <div class="col-lg-6 mt-lg-0 mt-5 ps-lg-0 ps-0">
         <div class="p-3 info-horizontal">
