@@ -33,13 +33,15 @@
 </head>
 
 <body>
-  <main class="main-content position-relative max-height-vh-100 h-100 mt-1 border-radius-lg ">
+  <div class="container-fluid wrapper">
+    <main class="main-content position-relative max-height-vh-100 h-100 mt-1 border-radius-lg ">
 
-    {{.LayoutContent}}
+      {{.LayoutContent}}
 
-  </main>
+    </main>
 
-  {{template "partials/footer.tpl" .}}
+    {{template "partials/footer.tpl" .}}
+  </div>
 
   <!--   Core JS Files   -->
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
