@@ -2,8 +2,11 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta charset="UTF-8">
+  <meta name="description" content="Goffredo is the first bot that introduces you with music when you log into a Discord voice chat">
+  <meta name="keywords" content="Discord, Bot, Sound, Goffredo">
+  <meta name="author" content="Riccardo Tornesello">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- Favicon -->
   <link rel="apple-touch-icon" sizes="180x180" href="/static/ico/apple-touch-icon.png">
@@ -17,7 +20,7 @@
   <meta name="theme-color" content="#ffffff">
 
   <title>
-    Goffredo Bot
+    Goffredo - Funny sounds Discord bot
   </title>
   
   <!--     Fonts and icons     -->
