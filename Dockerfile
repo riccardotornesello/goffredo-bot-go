@@ -6,10 +6,12 @@ RUN go mod download
 COPY . .
 RUN GOOS=linux go build -a -installsuffix cgo -o app .
 
-FROM alpine:latest  
+FROM alpine:latest
+RUN addgroup -S goffredo && adduser -S goffredo -G goffredo
 RUN apk --no-cache add ffmpeg
 WORKDIR /app
 COPY --from=build /app/src/app ./
 COPY views/ views/
 COPY conf/ conf/
+USER goffredo
 CMD ["./app"]
