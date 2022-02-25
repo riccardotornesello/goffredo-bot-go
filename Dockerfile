@@ -13,5 +13,6 @@ WORKDIR /app
 COPY --from=build /app/src/app ./
 COPY views/ views/
 COPY conf/ conf/
+COPY static/ static/
 USER goffredo
 CMD ["./app"]
