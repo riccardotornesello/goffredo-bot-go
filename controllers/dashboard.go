@@ -96,7 +96,7 @@ func (c *DashboardController) Post() {
 	}
 	id, err := o.Insert(&sound)
 	if err != nil {
-		fmt.println(err)
+		fmt.Printf("ID: %d, ERR: %v\n", id, err)
 		c.Ctx.Abort(500, "Error")
 		return
 	}
