@@ -9,6 +9,7 @@ services:
     volumes:
       - ./data/db:/app/data/db
       - ./sounds:/app/sounds
+      - ./conf/secrets.conf:/app/conf/secrets.conf
   proxy:
     build:
       context: .
@@ -18,14 +19,16 @@ services:
       - 80
     depends_on:
       - web
-    networks:
-      - default
-      - web
-    labels:
-      - traefik.enable=true
-      - traefik.http.routers.goffredo.rule=Host(`goffredobot.xyz`)
-      - traefik.http.routers.goffredo.tls=true
+    ports:
+      - 8000:80
+    #networks:
+    #  - default
+    #  - web
+    #labels:
+    #  - traefik.enable=true
+    #  - traefik.http.routers.goffredo.rule=Host(`goffredobot.xyz`)
+    #  - traefik.http.routers.goffredo.tls=true
 
-networks:
-  web:
-    external: true
+#networks:
+#  web:
+#    external: true
